@@ -15,14 +15,6 @@ describe("URLUtils", () => {
     expect(url).toBeDefined();
   });
 
-  it("should update the path", () => {
-    const url = URLUtils.url("https://example.com");
-
-    url.setPath("/new-path");
-
-    expect(url.pathWithQueryAndHash).toBe("/new-path");
-  });
-
   it("should update search params", () => {
     const url = URLUtils.url("https://example.com");
 
@@ -33,7 +25,7 @@ describe("URLUtils", () => {
 
   it("should convert search params to object", () => {
     const searchParams = new URLSearchParams("key=value");
-    const obj = URLUtils.searchParamsToObject(searchParams);
+    const obj = URLUtils.convertSearchParamsToObject(searchParams);
 
     expect(obj).toEqual({ key: "value" });
   });

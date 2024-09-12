@@ -1,43 +1,16 @@
-class UrlHelper {
-  public url: URL;
-
-  constructor(url: string) {
-    this.url = new URL(url);
-  }
-
-  get pathWithQueryAndHash() {
-    return `${this.url.pathname}${this.url.search}${this.url.hash}`;
-  }
-
-  get href() {
-    return this.url.href;
-  }
-
-  setPath(path: string) {
-    this.url.pathname = path;
-
-    return this;
-  }
-
-  updateSearchParams(params: Record<string, string>) {
-    Object.entries(params).forEach(([key, value]) => {
-      this.url.searchParams.set(key, encodeURIComponent(value));
-    });
-
-    return this;
-  }
-
-  getSearchParam(key: string) {
-    const value = this.url.searchParams.get(key);
-
-    return value && decodeURIComponent(value);
-  }
-}
+import { UrlHelper } from "./UrlHelper";
 
 export class URLUtils {
+  /**
+   * Create a new UrlHelper instance from a URL string.
+   * Allows for easy manipulation of the URL.
+   */
   static url = (url = window.location.href) => new UrlHelper(url);
 
-  static searchParamsToObject = <T extends string>(
+  /**
+   * Convert a URLSearchParams object to a plain object.
+   */
+  static convertSearchParamsToObject = <T extends string>(
     searchParams: URLSearchParams
   ) => {
     const obj: Record<string, string> = {};
@@ -49,10 +22,12 @@ export class URLUtils {
     return obj as Record<T, string | null>;
   };
 
+  /** Update the path of the current URL. */
   static updatePath = (path: string) => {
     return this.url().setPath(path).href;
   };
 
+  /** Remove the trailing slash from a URL. */
   static removeTrailingSlash = (url: string) => {
     return url.endsWith("/") ? url.slice(0, -1) : url;
   };

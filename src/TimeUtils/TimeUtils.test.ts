@@ -1,4 +1,4 @@
-import { TimeUtils } from ".";
+import * as TimeUtils from ".";
 
 describe("TimeUtils", () => {
   it("should convert minutes to milliseconds", () => {
