@@ -1,0 +1,23 @@
+{
+  "name": "@bphillipsdev/utilities",
+  "version": "1.0.12",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "test": "npm run clean && jest",
+    "prerelease": "npm run clean && npm run test && npm run build && ts-node setupPublish.ts",
+    "release": "cd dist && npm publish"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "ts-node": "^10.9.2"
+  }
+}
